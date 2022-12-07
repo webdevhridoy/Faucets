@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div>
             <Notice></Notice>
-            <div className='bg-[#EEF2FE]'>
+            <div className='bg-[#EEF2FE] pb-5'>
                 <Wallet></Wallet>
             </div>
         </div>
