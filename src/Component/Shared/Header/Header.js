@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Arbitrum from '../../../asset/arbitrum.79164059.png';
 import Avalanche from '../../../asset/avalanche.234db155.png';
 import Testnet from '../../../asset/bsc.d8c61230.png';
@@ -14,6 +14,16 @@ import Modal from '../Modal/Modal';
 const Header = () => {
     const { setSelect } = useContext(authContext);
     // const [openNetwork, setOpenNetwork] = useState(false);
+    const { user, logOut } = useContext(authContext);
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                navigate('/login');
+            })
+            .catch((err) => console.error(err));
+    };
 
     const networksTabs = [
         {
@@ -82,7 +92,6 @@ const Header = () => {
                                         }
                                     </select>
                                 </div>
-
                                 <div>
                                     <button className="bg-transparent capitalize px-5 py-1.5 border-2 border-green-600 flex justify-center items-center">
                                         <span>
@@ -105,15 +114,20 @@ const Header = () => {
                             </div>
                             <div>
                                 <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100  w-52">
-                                    <li>
-                                        <Link to='/login' className="justify-between">
-                                            Login
-                                        </Link>
-                                    </li>
-                                    <li><Link to='/signup' className="justify-between">
-                                        Sign up
-                                    </Link></li>
-                                    <li><Link>Logout</Link></li>
+                                    {user?.uid || user?.email ?
+                                        <li onClick={handleSignOut}><Link>Logout</Link></li>
+                                        :
+                                        <>
+                                            <li>
+                                                <Link to='/login' className="justify-between">
+                                                    Login
+                                                </Link>
+                                            </li>
+                                            <li><Link to='/signup' className="justify-between">
+                                                Sign up
+                                            </Link></li>
+                                        </>
+                                    }
                                 </ul>
                             </div>
                         </div>
