@@ -115,7 +115,12 @@ const Header = () => {
                             <div>
                                 <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100  w-52">
                                     {user?.uid || user?.email ?
-                                        <li onClick={handleSignOut}><Link>Logout</Link></li>
+                                        <>
+                                            <li onClick={handleSignOut}><Link>Logout</Link></li>
+                                            <li><Link to='/faq' className="justify-between">
+                                                Faq
+                                            </Link></li>
+                                        </>
                                         :
                                         <>
                                             <li>
@@ -125,6 +130,9 @@ const Header = () => {
                                             </li>
                                             <li><Link to='/signup' className="justify-between">
                                                 Sign up
+                                            </Link></li>
+                                            <li><Link to='/faq' className="justify-between">
+                                                Faq
                                             </Link></li>
                                         </>
                                     }

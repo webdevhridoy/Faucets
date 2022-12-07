@@ -6,9 +6,15 @@ import Header from '../Component/Shared/Header/Header';
 const Main = () => {
     return (
         <div>
-            <Header></Header>
-            <Outlet></Outlet>
-            <Footer></Footer>
+            <div className='shadow'>
+                <Header></Header>
+            </div>
+            <div>
+                <Outlet></Outlet>
+            </div>
+            <div>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };
